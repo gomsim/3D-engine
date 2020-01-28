@@ -20,9 +20,17 @@ public class Renderer extends JPanel {
 
     private void renderRaycast(){
         int numProcessors = Runtime.getRuntime().availableProcessors();
+        Thread[] threads = new Thread[numProcessors];
         System.out.println("Renderer: rendering");
         for (int startY = 0; startY < numProcessors; startY++){
-            new Thread(new RenderingThread(startY,numProcessors)).start();
+            threads[startY] = new Thread(new RenderingThread(startY,numProcessors));
+            threads[startY].start();
+        }
+        try {
+            for (Thread thread : threads)
+                thread.join();
+        }catch(InterruptedException e){
+            e.printStackTrace();
         }
         System.out.println("Renderer: successfully rendered");
     }
@@ -42,17 +50,6 @@ public class Renderer extends JPanel {
                 }
             }
             repaint();
-        }
-    }
-    public static class ColoredPolygon extends java.awt.Polygon {
-
-        public Color color;
-        public double distance;
-
-        public ColoredPolygon(int[] x, int[] y, int n, Color color, double distance){
-            super(x,y,n);
-            this.color = color;
-            this.distance = distance;
         }
     }
 }
