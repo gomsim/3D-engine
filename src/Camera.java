@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class    Camera {
 
-    private final int LENS_DISTANCE = 1000;//(int)Math.sqrt(Math.pow(Engine.SCREEN_WIDTH,2)+Math.pow(Engine.SCREEN_HEIGHT,2));
+    private final int LENS_DISTANCE = 1000;
     private final int FOCAL_X = Engine.SCREEN_WIDTH/2;
     private final int FOCAL_Y = Engine.SCREEN_HEIGHT/2;
     private final Color EMPTY_COLOR = Color.BLACK;
@@ -23,13 +23,6 @@ public class    Camera {
         return rayVectors;
     }
 
-    public Renderer.ColoredPolygon getFlatPolygon(Polygon polygon){
-        Vertex[] vertices = polygon.getVertices();
-        double[] a = vertices[0].asVector();
-        double[] b = vertices[1].asVector();
-        double[] c = vertices[2].asVector();
-        return null;
-    }
     public Color getPixelColor(int x, int y){
         return getFirstColor(rayVectors[x][y]);
     }
@@ -52,22 +45,4 @@ public class    Camera {
         }
         return EMPTY_COLOR;
     }
-    public TreeMap<Double, Artifact> getIntersectingArtifactsTest(int x, int y){
-        return Engine.instance.intersectingArtifacts(rayVectors[x][y]);
-    }
-    public Color getRayColorTest(int x, int y){
-        return getFirstColor(rayVectors[x][y]);
-    }
-    public PolyRayHitInfo getHitInfoTest(int x, int y){
-        double[] dir= rayVectors[x][y];
-        TreeMap<Double, Artifact> intersects = Engine.instance.intersectingArtifacts(rayVectors[x][y]);
-        PolyRayHitInfo hitInfo = null;
-        for (Map.Entry<Double, Artifact> entry : intersects.entrySet()) {
-            double distance = entry.getKey();
-            Artifact artifact = entry.getValue();
-            return hitInfo = artifact.getHitInfo(Engine.ORIGIN,dir);
-        }
-        return null;
-    }
-
 }
