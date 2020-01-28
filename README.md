@@ -12,6 +12,10 @@ Outside a large block/room
 
 ![Outside block](https://github.com/gomsim/3D-engine/blob/master/DemoPictures/OutsideBlock.png)
 
+Inside a large cube, looking towards the ceiling
+
+![Ceiling](https://github.com/gomsim/3D-engine/blob/master/DemoPictures/Ceiling.png)
+
 Inside a large cube, looking towards a dark corner
 
 ![Inside cube](https://github.com/gomsim/3D-engine/blob/master/DemoPictures/InsideCube.png)
